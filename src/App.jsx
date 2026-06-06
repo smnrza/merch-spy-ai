@@ -81,7 +81,7 @@ function genAmazon(keyword) {
   return AMAZON_POOL.map((item, i) => ({
     ...item,
     title: i === 0 ? `${keyword} Funny Tee Women Gift` : item.title.replace(/cat mom/i, keyword),
-    url: `https://amazon.com/dp/B0${Math.random().toString(36).substr(2,8).toUpperCase()}`,
+    url: `https://www.amazon.com/s?k=${encodeURIComponent(item.title.replace(/cat mom/i, keyword))}`,
     id: i,
   }));
 }
@@ -89,7 +89,7 @@ function genEtsy(keyword) {
   return ETSY_POOL.map((item, i) => ({
     ...item,
     title: item.title.replace(/cat mom/i, keyword),
-    url: `https://etsy.com/listing/${Math.floor(Math.random()*9e8+1e8)}`,
+    url: `https://www.etsy.com/search?q=${encodeURIComponent(item.title.replace(/cat mom/i, keyword))}`,
     id: i,
   }));
 }
@@ -287,7 +287,7 @@ const css = `
   .topbar {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
     margin-bottom: 36px;
     padding-bottom: 20px;
     border-bottom: 1px solid var(--border);
@@ -313,14 +313,28 @@ const css = `
   .user-info {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     font-size: 13px;
+  }
+  .user-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--text);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    letter-spacing: 0;
   }
   .user-email {
     color: var(--sub);
     font-family: 'Geist Mono', monospace;
     font-size: 12px;
-    max-width: 180px;
+    max-width: 160px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -454,6 +468,7 @@ const css = `
     text-transform: uppercase;
     letter-spacing: 0.06em;
     font-family: 'Geist Mono', monospace;
+    white-space: nowrap;
   }
   td {
     padding: 11px 14px;
@@ -481,6 +496,7 @@ const css = `
     color: var(--blue);
     text-decoration: none;
     font-family: 'Geist Mono', monospace;
+    white-space: nowrap;
   }
   .link:hover { text-decoration: underline; }
   .table-foot {
@@ -799,13 +815,12 @@ function Dashboard({ user, onLogout }) {
             </div>
           </div>
           <div className="user-info">
+            <div className="user-avatar">
+              {user.email ? user.email[0].toUpperCase() : "U"}
+            </div>
             <span className="user-email">{user.email}</span>
             <span className="divider-dot">·</span>
             <button className="btn-ghost" onClick={onLogout}>Sign out</button>
-          </div>
-          <div className="credit">
-            <span className="credit-name">Reza</span>
-            <span className="credit-line">ThinkSys IT · <a href="https://t.me/Xystic" target="_blank" rel="noreferrer">TG: Xystic</a></span>
           </div>
         </div>
 
@@ -895,7 +910,7 @@ function Dashboard({ user, onLogout }) {
                         ))}
                     </tbody>
                   </table>
-                  <div className="table-foot">{filtered.length} of {amazon.length} listings · Demo data</div>
+                <div className="table-foot">{filtered.length} of {amazon.length} listings</div>
                 </div>
               </>
             )}
@@ -919,7 +934,7 @@ function Dashboard({ user, onLogout }) {
                     ))}
                   </tbody>
                 </table>
-                <div className="table-foot">Green = low competition · Demo data</div>
+                <div className="table-foot">Green = low competition</div>
               </div>
             )}
 
@@ -991,6 +1006,12 @@ function Dashboard({ user, onLogout }) {
             <div className="empty-t">Fetching data…</div>
           </div>
         )}
+
+        {/* Footer */}
+        <div style={{textAlign:"center", marginTop:48, paddingTop:20, borderTop:"1px solid var(--border)", fontSize:12, color:"var(--muted)", fontFamily:"'Geist Mono', monospace"}}>
+          Made by <strong style={{color:"var(--sub)"}}>Reza</strong> · ThinkSys IT ·{" "}
+          <a href="https://t.me/Xystic" target="_blank" rel="noreferrer" style={{color:"var(--sub)", textDecoration:"none"}}>TG: Xystic</a>
+        </div>
       </div>
     </>
   );
