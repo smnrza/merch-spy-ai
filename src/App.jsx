@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
 // ── Supabase config ───────────────────────────────────────────────────────────
-const SUPABASE_URL = "https://jigtnygqlnwigpdmbrmu.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImppZ3RueWdxbG53aWdwZG1icm11Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3MDEwMzIsImV4cCI6MjA5NjI3NzAzMn0.VnS88Bumt3tTwOJJpoBaiREl7orTZRK7NV-wojTSNHE";
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 const sb = {
   async signUp(email, password) {
