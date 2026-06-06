@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
 // ── Supabase config ───────────────────────────────────────────────────────────
-const SUPABASE_URL = "https://YOUR_PROJECT.supabase.co";
-const SUPABASE_ANON_KEY = "YOUR_ANON_KEY";
+const SUPABASE_URL = "https://jigtnygqlnwigpdmbrmu.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_ynTEm8UCqIV033FvAEHTtw_IgjSqZ3z";
 
 const sb = {
   async signUp(email, password) {
